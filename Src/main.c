@@ -60,20 +60,20 @@ static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 
-void ByteDataWrite(uint8_t data)
-{
-	for(uint8_t i = 0; i<8; i++)
-	{
-		if(data & 0b10000000)
-			set_bit(DATA);
-		else
-			clear_bit(DATA);
-
-		ShiftClock();
-		data = data << 1;
-	}
-	LatchClock();
-}
+//void ByteDataWrite(uint8_t data)
+//{
+//	for(uint8_t i = 0; i<8; i++)
+//	{
+//		if(data & 0b10000000)
+//			set_bit(DATA);
+//		else
+//			clear_bit(DATA);
+//
+//		ShiftClock();
+//		data = data << 1;
+//	}
+//	LatchClock();
+//}
 
 /* USER CODE END PFP */
 
@@ -116,10 +116,19 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int delayvalue = 1000;
 	while (1)
 	{
+		if( HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == 0 )
+		{
+			delayvalue = 500;
+		}
+		else if( HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == 0)
+		{
+			delayvalue = 100;
+		}
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		HAL_Delay(200);
+		HAL_Delay(delayvalue);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
