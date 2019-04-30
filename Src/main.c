@@ -116,16 +116,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int delayvalue = 1000;
+  int delayvalue = 0;
 	while (1)
 	{
 		if( HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == 0 )
 		{
-			delayvalue = 500;
+			delayvalue = 100;
 		}
 		else if( HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == 0)
 		{
-			delayvalue = 100;
+			delayvalue = 1000;
 		}
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 		HAL_Delay(delayvalue);
